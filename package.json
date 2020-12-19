@@ -1,0 +1,29 @@
+{
+  "name": "image-uploader",
+  "version": "1.0.0",
+  "description": "Build Image Uploader app for DevChallenges.io",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "formidable": "^1.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/longetka/-DevChallenges-Image-Uploader.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "Express"
+  ],
+  "author": "Denis Cherepanov <longetka@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/longetka/-DevChallenges-Image-Uploader/issues"
+  },
+  "homepage": "https://github.com/longetka/-DevChallenges-Image-Uploader#readme"
+}

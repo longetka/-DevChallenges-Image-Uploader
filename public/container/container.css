@@ -1,0 +1,32 @@
+@import './__header.css';
+@import './__uploadFrame.css';
+@import './__chooseFile.css';
+
+.container {
+    height: 470px;
+    width: 400px;
+}
+
+/* Flex Options */
+.container,
+.container__header,
+.container__uploadFrame,
+.container__chooseFile {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+}
+
+.container__header,
+.container__uploadFrame {
+    justify-content: center;
+}
+
+
+.container__header__title,
+.container__header__note,
+.container__uploadFrame__note,
+.container__chooseFile label {
+    font-weight: 500;
+    font-style: normal;
+}

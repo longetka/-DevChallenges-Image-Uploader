@@ -1,0 +1,14 @@
+.container__uploadFrame {
+    height: 220px;
+    width: 340px;
+
+    border: 1px dashed #97BEF4;
+    border-radius: 12px;
+}
+
+.container__uploadFrame__note {
+    margin-top: 37px;
+
+    font-size: 12px;
+    color: #BDBDBD;
+}
