@@ -8,4 +8,12 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/uploading', (req, res) => {
+    
+});
+
+router.get('/success', (req, res) => {
+
+});
+
 module.exports = router;

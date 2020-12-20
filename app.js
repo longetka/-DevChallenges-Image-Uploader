@@ -3,7 +3,7 @@ const path = require('path');
 const formidable = require('formidable');
 const fs = require('fs');
 const { PORT } = require('./config/config.js');
-const index = require('./routes/main');
+const index = require('./routes/router');
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
