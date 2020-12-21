@@ -9,8 +9,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon index"
+    "start": "node app",
+    "dev": "nodemon app"
   },
   "repository": {
     "type": "git",
