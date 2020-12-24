@@ -15,13 +15,9 @@
     color: #BDBDBD;
 }
 
-/* #fileUpload {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    visibility: hidden;
-    z-index: 1000;
-} */
+#fileUpload {
+    display: none;
+}
 
 .highlight {
     border: 1px solid #97BEF4;
