@@ -1,83 +1,66 @@
 const chooseBtn = document.getElementById('button');
 const input = document.getElementById('fileUpload');
 const frame = document.getElementById('frameUpload');
-const form = document.getElementById('form');
+const url = 'http://localhost:8080/upload'; // (1) URL routes.post('url')
+const xhr = new XMLHttpRequest(); // Create XMLHttpRequest instance
+const formData = new FormData(); // Create FormData instance
 
+if (window.location.pathname === '/') {
 
-chooseBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    input.click();
-});
+    // Click upload file(s)
 
-input.addEventListener('change', upload, false);
+    chooseBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        input.click();
+    });
 
-function upload(e) {
-    const url = 'http://localhost:8080/upload'; // (1) URL routes.post('url')
-    const file = Array.from(e.target.files); // (2) Get the file to upload
+    input.addEventListener('change', handleClick, false);
 
-    console.log(file);
-    const xhr = new XMLHttpRequest(); // Create XMLHttpRequest instance
-    const formData = new FormData(); // Create FormData instance
+    function handleClick(e) {
+        const file = Array.from(e.target.files); // (2) Get the file to upload
+        upload(file[0]);
+    };
 
-    file.forEach(file => { // Iterate files for multiple file upload 
-        formData.append('file', file) // (3) Create form for send to server
+    // Drag and drop upload file(s)
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        frame.addEventListener(eventName, preventDefaults, false)
+    });
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        frame.addEventListener(eventName, highlight, false)
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        frame.addEventListener(eventName, unhighlight, false)
     })
 
-    xhr.open('POST', url); // Open request with post method and upload url (1)
-    xhr.send(formData); // Send our created form (3) with file (2) to server
-    consoloe.log(xhr.upload());
-};
+    frame.addEventListener('drop', handleDrop, false)
 
-// ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-//     frame.addEventListener(eventName, preventDefaults, false)
-// });
+    function handleDrop(e) {
+        let dt = e.dataTransfer;
+        let file = Array.from(dt.files);
+        upload(file[0]);
+    }
 
-// ['dragenter', 'dragover'].forEach(eventName => {
-//     frame.addEventListener(eventName, highlight, false)
-// });
+    // Deliver file(s) to server
+    function upload(file) {
+        formData.append('file', file) // (3) Create form for send to server
 
-// ['dragleave', 'drop'].forEach(eventName => {
-//     frame.addEventListener(eventName, unhighlight, false)
-// })
+        xhr.open('POST', url); // Open request with post method and upload url (1)
+        xhr.send(formData); // Send our created form (3) with file (2) to server
+    }
 
-// frame.addEventListener('drop', handleDrop, false)
+    function preventDefaults(e) {
+        e.preventDefault()
+        e.stopPropagation()
+    };
 
-// function handleDrop(e) {
-//     let dt = e.dataTransfer;
-//     let files = dt.files;
+    function highlight(e) {
+        frame.classList.add('highlight');
+    };
 
-//     handleFiles(files);
-// }
-
-// function handleFiles(files) {
-//     ([...files]).forEach(uploadFile)
-// }
-
-// function uploadFile(file) {
-//     let url = '/';
-//     let formData = new FormData();
-
-//     formData.append('file', file)
-
-//     fetch(url, {
-//         type: 'POST',
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-//     })
-//     .then(() => {console.log('File uploaded');})
-//     .catch(() => {console.log('Error');})
-// }
-
-// function preventDefaults(e) {
-//     e.preventDefault()
-//     e.stopPropagation()
-// };
-
-// function highlight(e) {
-//     frame.classList.add('highlight');
-// };
-
-// function unhighlight(e) {
-//     frame.classList.remove('highlight');
-// };
+    function unhighlight(e) {
+        frame.classList.remove('highlight');
+    };
+}
